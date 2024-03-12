@@ -35,16 +35,23 @@ public class PlayerController : MonoBehaviour
 
     private bool _isSprint;
     private bool _isWalking;
+    private float _currentStamina;
 
     private void Awake()
     {
         _characterController = GetComponent<CharacterController>();
     }
 
+    private void Start()
+    {
+        _currentStamina = _maxStamina;
+    }
+
 
     private void Update()
     {
         Move();
+        CalculateStamina();
         Look();
     }
 
@@ -107,6 +114,27 @@ public class PlayerController : MonoBehaviour
 
     private void CalculateStamina()
     {
+        if (_isSprint)
+        {
+            if (_currentStamina > 0f)
+            {
+                _currentStamina -= _usageStamina * Time.deltaTime;
+
+                if (_currentStamina <= 0f)
+                    _isSprint = false;
+            }
+        }
+
+        else
+        {
+            if (_currentStamina < _maxStamina)
+            {
+                _currentStamina += _restoreStamina * Time.deltaTime;
+
+                if (_currentStamina > _maxStamina)
+                    _currentStamina = _maxStamina;
+            }
+        }
 
     }
 
