@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
@@ -29,6 +30,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _delayRestoreTime;
 
     private CharacterController _characterController;
+    private event UnityAction<float> _onStaminaChange;
 
     private Vector3 _newPlayerPosition;
     private Vector3 _newRotationCamera;
@@ -38,6 +40,12 @@ public class PlayerController : MonoBehaviour
     private bool _isWalking;
     private float _currentStamina;
     private float _currentRestoreTime;
+
+    public event UnityAction<float> OnStaminaChange
+    {
+        add { _onStaminaChange += value;}
+        remove { _onStaminaChange -= value;}
+    }
 
     private void Awake()
     {
@@ -123,6 +131,8 @@ public class PlayerController : MonoBehaviour
             {
                 _currentStamina -= _usageStamina * Time.deltaTime;
                 _currentRestoreTime = _delayRestoreTime;
+                _onStaminaChange?.Invoke(_currentStamina);
+
             }
         }
         else if (!_isSprint && _currentStamina < _maxStamina)
@@ -134,6 +144,7 @@ public class PlayerController : MonoBehaviour
             else
             {
                 _currentStamina += _restoreStamina * Time.deltaTime;
+                _onStaminaChange?.Invoke(_currentStamina);
 
                 if (_currentStamina >= _maxStamina)
                 {

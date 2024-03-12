@@ -9,6 +9,7 @@ public class InputHandler : MonoBehaviour
     public Vector2 LookInput { get; private set; } 
     public bool SprintPress { get; private set; }
     public bool JumpPress { get; private set; }
+    public bool ShootPress { get; private set; }
 
     private void Awake()
     {
@@ -26,6 +27,14 @@ public class InputHandler : MonoBehaviour
 
         _actions.Player.Jump.started += OnJump;
         _actions.Player.Jump.canceled += OnJump;
+
+        _actions.Player.Shoot.performed += OnShoot;
+        _actions.Player.Shoot.canceled += OnShoot;
+    }
+
+    private void OnShoot(InputAction.CallbackContext context)
+    {
+        ShootPress = context.ReadValueAsButton();
     }
 
     private void OnJump(InputAction.CallbackContext context)
