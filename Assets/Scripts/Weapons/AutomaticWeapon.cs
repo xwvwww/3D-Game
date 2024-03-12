@@ -17,7 +17,7 @@ public class AutomaticWeapon : Weapon
 
     void Update()
     {
-        
+        Shoot();
     }
 
     protected override void Shoot()
