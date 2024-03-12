@@ -22,13 +22,19 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _stickToGroundForce;
     [SerializeField] private float _gravityMultiplier;
 
-
+    [Header("Stamina")]
+    [SerializeField] private float _maxStamina;
+    [SerializeField] private float _restoreStamina;
+    [SerializeField] private float _usageStamina;
 
     private CharacterController _characterController;
 
     private Vector3 _newPlayerPosition;
     private Vector3 _newRotationCamera;
     private Vector3 _newRotationPlayer;
+
+    private bool _isSprint;
+    private bool _isWalking;
 
     private void Awake()
     {
@@ -50,7 +56,15 @@ public class PlayerController : MonoBehaviour
         if (direction.magnitude > 1f)
             direction.Normalize();
 
-        float speed = _inputHandler.SprintPress ? _sprintSpeed : _walkSpeed;
+
+        if (_inputHandler.SprintPress && direction.magnitude > 0.2f)
+            _isSprint = true;
+        else
+            _isSprint = false;
+
+        _isWalking = !_isSprint && direction.magnitude > 0.2f;
+
+        float speed = _isWalking ? _walkSpeed : _sprintSpeed;
 
         if (Physics.SphereCast(transform.position, _characterController.radius ,Vector3.down,
             out RaycastHit hit, _characterController.height / 2f, 1))
@@ -89,6 +103,11 @@ public class PlayerController : MonoBehaviour
 
         transform.localRotation = Quaternion.Euler(_newRotationPlayer);
         _cameraHolder.localRotation = Quaternion.Euler(_newRotationCamera);
+    }
+
+    private void CalculateStamina()
+    {
+
     }
 
 

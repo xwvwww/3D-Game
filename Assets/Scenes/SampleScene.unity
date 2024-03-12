@@ -372,6 +372,9 @@ MonoBehaviour:
   _maxAngle: 80
   _stickToGroundForce: 2
   _gravityMultiplier: 2
+  _maxStamina: 100
+  _restoreStamina: 10
+  _usageStamina: 10
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
