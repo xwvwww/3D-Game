@@ -64,7 +64,7 @@ public class PlayerController : MonoBehaviour
             direction.Normalize();
 
 
-        if (_inputHandler.SprintPress && direction.magnitude > 0.2f)
+        if (_inputHandler.SprintPress && direction.magnitude > 0.2f && _currentStamina > 25f)
             _isSprint = true;
         else
             _isSprint = false;
@@ -120,8 +120,7 @@ public class PlayerController : MonoBehaviour
             {
                 _currentStamina -= _usageStamina * Time.deltaTime;
 
-                if (_currentStamina <= 0f)
-                    _isSprint = false;
+                
             }
         }
 
