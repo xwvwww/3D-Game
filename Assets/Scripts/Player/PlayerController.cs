@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _maxStamina;
     [SerializeField] private float _restoreStamina;
     [SerializeField] private float _usageStamina;
+    [SerializeField] private float _delayRestoreTime;
 
     private CharacterController _characterController;
 
@@ -36,6 +37,7 @@ public class PlayerController : MonoBehaviour
     private bool _isSprint;
     private bool _isWalking;
     private float _currentStamina;
+    private float _currentRestoreTime;
 
     private void Awake()
     {
@@ -45,6 +47,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         _currentStamina = _maxStamina;
+        _currentRestoreTime = _delayRestoreTime;
     }
 
 
@@ -119,19 +122,24 @@ public class PlayerController : MonoBehaviour
             if (_currentStamina > 0f)
             {
                 _currentStamina -= _usageStamina * Time.deltaTime;
-
-                
+                _currentRestoreTime = _delayRestoreTime;
             }
         }
-
-        else
+        else if (!_isSprint && _currentStamina < _maxStamina)
         {
-            if (_currentStamina < _maxStamina)
+            if (_currentRestoreTime > 0f)
+            {
+                _currentRestoreTime -= Time.deltaTime;
+            }
+            else
             {
                 _currentStamina += _restoreStamina * Time.deltaTime;
 
-                if (_currentStamina > _maxStamina)
+                if (_currentStamina >= _maxStamina)
+                {
                     _currentStamina = _maxStamina;
+                    _currentRestoreTime = _delayRestoreTime;
+                }
             }
         }
 
