@@ -543,7 +543,7 @@ MonoBehaviour:
   _inputHandler: {fileID: 19327564}
   _walkSpeed: 2
   _sprintSpeed: 6
-  _jumpHeight: 5
+  _jumpHeight: 6
   _cameraHolder: {fileID: 1694312273}
   _sensX: 8
   _sensY: 8
