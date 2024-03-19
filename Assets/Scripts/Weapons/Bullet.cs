@@ -11,9 +11,12 @@ public class Bullet : MonoBehaviour
         GetComponent<Rigidbody>().velocity = transform.forward * _speed;
     }
 
-
-    void Update()
+    private void OnCollisionEnter(Collision collision)
     {
-        
+        if (collision.transform.tag == "Enemy")
+        {
+            Destroy(collision.gameObject);
+            Destroy(gameObject);
+        }
     }
 }
