@@ -8,7 +8,7 @@ public class Bullet : MonoBehaviour
 
     void Start()
     {
-        GetComponent<Rigidbody>().AddForce(transform.forward * _speed, ForceMode.Impulse); 
+        GetComponent<Rigidbody>().velocity = transform.forward * _speed;
     }
 
 
