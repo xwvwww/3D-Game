@@ -10,6 +10,7 @@ public class InputHandler : MonoBehaviour
     public bool SprintPress { get; private set; }
     public bool JumpPress { get; private set; }
     public bool ShootPress { get; private set; }
+    public bool ReloadPress { get; private set; }
 
     private void Awake()
     {
@@ -30,6 +31,14 @@ public class InputHandler : MonoBehaviour
 
         _actions.Player.Shoot.performed += OnShoot;
         _actions.Player.Shoot.canceled += OnShoot;
+
+        _actions.Player.Reload.started += OnReload;
+        _actions.Player.Reload.canceled += OnReload;
+    }
+
+    private void OnReload(InputAction.CallbackContext context)
+    {
+        ReloadPress = context.ReadValueAsButton();
     }
 
     private void OnShoot(InputAction.CallbackContext context)
