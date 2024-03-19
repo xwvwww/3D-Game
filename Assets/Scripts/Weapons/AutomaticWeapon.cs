@@ -28,7 +28,7 @@ public class AutomaticWeapon : Weapon
                 return;
 
             _shootTime = Time.time;
-            Instantiate(_bullet, _shootPoint.position, _shootPoint.rotation);
+            Instantiate(_bullet, _shootPoint.transform.position, _shootPoint.transform.rotation);
         }
     }
 }
