@@ -5,6 +5,7 @@ using UnityEngine;
 public class AutomaticWeapon : Weapon
 {
     [SerializeField] private InputHandler _inputHandler;
+    [SerializeField] private Transform _crosshair;
 
     private int _currentClipSize;
     private float _shootTime;
@@ -22,13 +23,16 @@ public class AutomaticWeapon : Weapon
 
     protected override void Shoot()
     {
-        if (_inputHandler.ShootPress && _currentClipSize > 0)
+        if (_inputHandler.ShootPress && _currentClipSize > 0
+            && !_animator.GetCurrentAnimatorStateInfo(0).IsName("Run"))
         {
             if (Time.time - _shootTime < _shootDelay)
                 return;
 
+            _animator.Play("Shoot", 1);
             _shootTime = Time.time;
-            Instantiate(_bullet, _shootPoint.transform.position, _shootPoint.transform.rotation);
+            Instantiate(_bullet, _shootPoint.transform.position, 
+                        _shootPoint.transform.rotation);
         }
     }
 }

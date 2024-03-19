@@ -7,6 +7,9 @@ public class PlayerController : MonoBehaviour
     [Header("Input Handler")]
     [SerializeField] private InputHandler _inputHandler;
 
+    [Header("Animator")]
+    [SerializeField] private Animator _animator;
+
     [Header("Movement")]
     [SerializeField] private float _walkSpeed;
     [SerializeField] private float _sprintSpeed;
@@ -110,6 +113,8 @@ public class PlayerController : MonoBehaviour
         }
 
         _characterController.Move(_newPlayerPosition * Time.deltaTime);
+        _animator.SetFloat("Speed", direction.magnitude);
+        _animator.SetBool("IsSprint", _isSprint);
     }
 
     private void Look()
