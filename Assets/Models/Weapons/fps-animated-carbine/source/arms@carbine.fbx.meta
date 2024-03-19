@@ -3,7 +3,22 @@ guid: bdaf9cda51acb1f4ba23fee97d4b8135
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: arms
+    second: {fileID: 2100000, guid: 42f77f5a68e35794383f01799c2c4f34, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: carbine
+    second: {fileID: 2100000, guid: 8e73f516b836f114ebd043350b800df8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lens
+    second: {fileID: 2100000, guid: 7cbe6275bf28e3147870c3a20dc59b8b, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

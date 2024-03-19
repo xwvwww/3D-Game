@@ -11,6 +11,7 @@ public class InputHandler : MonoBehaviour
     public bool JumpPress { get; private set; }
     public bool ShootPress { get; private set; }
     public bool ReloadPress { get; private set; }
+    public bool AimPress { get; private set; }
 
     private void Awake()
     {
@@ -34,6 +35,14 @@ public class InputHandler : MonoBehaviour
 
         _actions.Player.Reload.started += OnReload;
         _actions.Player.Reload.canceled += OnReload;
+
+        _actions.Player.Aim.performed += OnAim;
+        _actions.Player.Aim.canceled += OnAim;
+    }
+
+    private void OnAim(InputAction.CallbackContext context)
+    {
+        AimPress = context.ReadValueAsButton();
     }
 
     private void OnReload(InputAction.CallbackContext context)
