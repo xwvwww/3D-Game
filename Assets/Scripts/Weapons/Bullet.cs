@@ -12,6 +12,7 @@ public class Bullet : MonoBehaviour
     void Start()
     {
         GetComponent<Rigidbody>().velocity = transform.forward * _speed;
+        StartCoroutine(DestroyBullet());
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -22,6 +23,12 @@ public class Bullet : MonoBehaviour
             Destroy(gameObject);
         }
 
+        Destroy(gameObject);
+    }
+
+    private IEnumerator DestroyBullet()
+    {
+        yield return new WaitForSeconds(5f);
         Destroy(gameObject);
     }
 }

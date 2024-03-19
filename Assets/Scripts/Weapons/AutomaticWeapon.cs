@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class AutomaticWeapon : Weapon
 {
+    [Header("Input Handler")]
     [SerializeField] private InputHandler _inputHandler;
-    [SerializeField] private Transform _crosshair;
+
+    [Header("Weapon Holder")]
     [SerializeField] private Transform _weaponHolder;
+
+    [Header("Aim")]
     [SerializeField] private Vector3 _aimPosition;
     [SerializeField] private float _speedAim;
 
@@ -42,6 +46,8 @@ public class AutomaticWeapon : Weapon
             _shootTime = Time.time;
             Instantiate(_bullet, _shootPoint.transform.position, 
                         _shootPoint.transform.rotation);
+            
+
         }
     }
 
