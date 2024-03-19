@@ -67,12 +67,17 @@ public class AutomaticWeapon : Weapon
         {
             _weaponHolder.localPosition = Vector3.Lerp(_weaponHolder.localPosition,
                                                        _aimPosition, _speedAim * Time.deltaTime);
+
+            Camera.main.fieldOfView = 35;
         }
         else
         {
             _weaponHolder.localPosition = Vector3.Lerp(_weaponHolder.localPosition,
                                                        _origin, _speedAim * Time.deltaTime);
+
+            Camera.main.fieldOfView = 60;
         }
+        
     }
 
     public void EndReload()
