@@ -46,10 +46,11 @@ public class AutomaticWeapon : Weapon
             _animator.Play("Shoot", 1);
             _currentClipSize--;
             _shootTime = Time.time;
-            Instantiate(_bullet, _shootPoint.transform.position, 
-                        _shootPoint.transform.rotation);
+            //Instantiate(_bullet, _shootPoint.transform.position, 
+            //            _shootPoint.transform.rotation);
             
-
+            GameObject b = PoolManager.GetObject("Bullet", _shootPoint.transform.position,
+                                                           _shootPoint.transform.rotation);
         }
     }
 

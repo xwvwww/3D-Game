@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PoolManager
@@ -28,5 +30,27 @@ public class PoolManager
 
             pool.Objects.Add(obj);
         }
+
+        _pools.Add(name, pool);
+    }
+
+    public static GameObject GetObject(string namePool, Vector3 position, Quaternion rotation)
+    {
+        if (!_pools.ContainsKey(namePool))
+            return null;
+
+        // GameObject obj = _pools[namePool].Objects.Find(item => item.activeSelf == false);
+        GameObject obj = _pools[namePool].Objects.FirstOrDefault(x => x.activeSelf == false);
+
+        if (obj == null) 
+            return null;
+
+        obj.transform.position = position;
+        obj.transform.rotation = rotation;
+        obj.SetActive(true);
+
+        return obj;
+
+
     }
 }
