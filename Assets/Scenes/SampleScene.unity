@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.45023847, g: 0.50027186, b: 0.5753716, a: 1}
+  m_IndirectSpecularColor: {r: 0.45023805, g: 0.5002709, b: 0.5753708, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -366,7 +366,7 @@ GameObject:
   - component: {fileID: 234068458}
   - component: {fileID: 234068457}
   m_Layer: 0
-  m_Name: Cube (1)
+  m_Name: Enemy 2
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -837,7 +837,7 @@ GameObject:
   - component: {fileID: 935018090}
   - component: {fileID: 935018089}
   m_Layer: 0
-  m_Name: Cube (2)
+  m_Name: Enemy 3
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1322,7 +1322,7 @@ GameObject:
   - component: {fileID: 1885357093}
   - component: {fileID: 1885357092}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Enemy 1
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

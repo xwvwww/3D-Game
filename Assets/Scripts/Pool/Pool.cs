@@ -8,6 +8,7 @@ public class Pool
     public int size;
     public bool resize;
     public List<GameObject> Objects;
+    public Transform parent;
 
     public Pool(string name, int size, bool resize)
     {

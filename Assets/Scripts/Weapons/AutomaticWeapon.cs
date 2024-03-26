@@ -24,6 +24,8 @@ public class AutomaticWeapon : Weapon
     {
         _currentClipSize = _clipSize;
         _origin = _weaponHolder.localPosition;
+
+        PoolManager.CreatePool("Bullet", _clipSize, _bullet, true);
     }
 
     void Update()
