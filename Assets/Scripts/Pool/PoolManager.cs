@@ -39,11 +39,24 @@ public class PoolManager
         if (!_pools.ContainsKey(namePool))
             return null;
 
-        // GameObject obj = _pools[namePool].Objects.Find(item => item.activeSelf == false);
+        //GameObject obj = _pools[namePool].Objects.Find(item => item.activeSelf == false);
         GameObject obj = _pools[namePool].Objects.FirstOrDefault(x => x.activeSelf == false);
 
-        if (obj == null) 
-            return null;
+        if (obj == null)
+        {
+            if (_pools[namePool].resize)
+            {
+                obj = GameObject.Instantiate(_pools[namePool].Objects[0]);
+                obj.name = _pools[namePool].name + (_pools[namePool].Objects.Count);
+                obj.transform.parent = _pools[namePool].parent;
+                obj.transform.position = position;
+                obj.transform.rotation = rotation;
+                obj.SetActive(true);
+                _pools[namePool].Objects.Add(obj);
+
+                return obj;
+            }
+        }
 
         obj.transform.position = position;
         obj.transform.rotation = rotation;

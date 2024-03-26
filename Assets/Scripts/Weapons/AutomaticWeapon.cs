@@ -40,7 +40,7 @@ public class AutomaticWeapon : Weapon
         if (_inputHandler.ShootPress && _currentClipSize > 0
             && !_animator.GetCurrentAnimatorStateInfo(0).IsName("Run") && !_isReloading)
         {
-            if (Time.time - _shootTime < _shootDelay)
+            if ((Time.time - _shootTime) < _shootDelay)
                 return;
 
             _animator.Play("Shoot", 1);
@@ -51,6 +51,9 @@ public class AutomaticWeapon : Weapon
             
             GameObject b = PoolManager.GetObject("Bullet", _shootPoint.transform.position,
                                                            _shootPoint.transform.rotation);
+
+            b.GetComponent<Rigidbody>().velocity = b.transform.forward * 1000;
+            b.GetComponent<Bullet>().DestroyWithDelay();
         }
     }
 
