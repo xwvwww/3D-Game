@@ -5,10 +5,18 @@ using UnityEngine.AI;
 
 public class AIZombie : MonoBehaviour
 {
+    [SerializeField] [Range(1f, 180f)]private float _fov;
+
     private AIWaypointNetwork _wayPoints;
     private NavMeshAgent _agent;
     private Transform _targetPlayer;
     private Transform _currentPoint;
+
+    public Transform TargetPlayer
+    {
+        get { return _targetPlayer; }
+        set { _targetPlayer = value; }
+    }
 
     private void Awake()
     {
@@ -30,12 +38,19 @@ public class AIZombie : MonoBehaviour
                 _currentPoint = _wayPoints.GetPoint();
             }
 
+            
+
             _agent.SetDestination(_currentPoint.position);
 
         }
         else
         {
-            _agent.SetDestination(_targetPlayer.position);
+            Vector3 direction = TargetPlayer.position - transform.position;
+
+            if (Vector3.Angle(direction, transform.forward) < _fov)
+            {
+                _agent.SetDestination(_targetPlayer.position);
+            }
         }
 
     }

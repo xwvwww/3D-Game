@@ -6,7 +6,7 @@ public class AIWaypointNetwork : MonoBehaviour
 {
     private Transform[] _points;
 
-    private void Start()
+    private void Awake()
     {
         _points = new Transform[transform.childCount];
 
