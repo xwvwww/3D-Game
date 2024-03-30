@@ -101,10 +101,12 @@ public class PlayerController : MonoBehaviour
             if (_inputHandler.JumpPress)
             {
                 _newPlayerPosition.y = _jumpHeight;
+                _animator.SetBool("IsJump", true);
             }
             else
             {
                 _newPlayerPosition.y = -_stickToGroundForce;
+                _animator.SetBool("IsJump", false);
             }
         }
         else
