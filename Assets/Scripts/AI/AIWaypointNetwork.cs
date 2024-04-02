@@ -6,7 +6,6 @@ public class AIWaypointNetwork : MonoBehaviour
 {
     private Transform[] _points;
     public Transform[] Points => _points;
-
     public Transform this[int i]
     {
         get { return _points[i]; }

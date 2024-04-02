@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using UnityEngine.UIElements;
 
 [CustomEditor(typeof(AIWaypointNetwork))]
 public class AIWaypointNetworkEditor : Editor
@@ -15,7 +16,7 @@ public class AIWaypointNetworkEditor : Editor
             if (network.Points == null)
                 return;
 
-            Handles.color = Color.red;
+            
             for (int i = 0; i < network.Points.Length; i++)
             {
                 if (network.Points[i] != null)
@@ -23,6 +24,25 @@ public class AIWaypointNetworkEditor : Editor
                     Handles.Label(network.Points[i].position, "Waypoint " + i);
                 }
             }
+
+            Vector3[] p = new Vector3[network.Points.Length + 1];
+            for (int i = 0; i <= network.Points.Length; i++)
+            {
+                int index = i != network.Points.Length ? i : 0;
+                if (network.Points[index] != null)
+                {
+                    p[i] = network.Points[index].position;
+                }
+                else
+                {
+                    p[i] = new Vector3(Mathf.Infinity,
+                                           Mathf.Infinity,
+                                           Mathf.Infinity);
+                }
+            }
+
+            Handles.color = Color.red;
+            Handles.DrawPolyLine(p);
         }
     }
 
