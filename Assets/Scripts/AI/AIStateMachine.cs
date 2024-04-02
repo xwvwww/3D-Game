@@ -13,9 +13,10 @@ public class AIStateMachine : StateMachine
 
         State[] st = GetComponents<State>();
         
-        foreach (State state in st )
+        foreach (State state in st)
         {
             StateType type = state.GetStateType();
+            state.SetStateMachine(this);
             _states[type] = state;
         }
     }
