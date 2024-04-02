@@ -5,7 +5,7 @@ using UnityEngine;
 
 public abstract class StateMachine : MonoBehaviour
 {
-    [SerializeField] private StateType _currentStateType;
+    [SerializeField] protected StateType _currentStateType;
 
     protected Dictionary<StateType, State> _states;
     protected State _currentState;
@@ -15,8 +15,16 @@ public abstract class StateMachine : MonoBehaviour
         _states = new Dictionary<StateType, State>();
     }
 
+    protected virtual void Start()
+    {
+
+    }
+
     protected virtual void Update()
     {
+        if (_currentState == null)
+            return;
+
         StateType newStateType = _currentState.UpdateState();
 
         if (newStateType != _currentStateType)
@@ -26,6 +34,10 @@ public abstract class StateMachine : MonoBehaviour
             if (_states.ContainsKey(newStateType))
             {
                 newState = _states[newStateType];
+                _currentState.ExitState();
+                _currentState = newState;
+                _currentState.EnterState();
+                _currentStateType = newStateType;
             }
 
         }
@@ -37,6 +49,7 @@ public abstract class StateMachine : MonoBehaviour
 
 public enum StateType
 {
+    None,
     Idle,
     Patrol,
     Pursuit,
