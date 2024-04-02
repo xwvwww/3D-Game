@@ -2,17 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class State : MonoBehaviour
+public abstract class State : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    protected StateMachine _stateMachine;
+
+    public void SetStateMachine(StateMachine stateMachine)
     {
-        
+        _stateMachine = stateMachine;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public abstract void EntryState();
+    public abstract StateType UpdateState();
+    public abstract void ExitState();
+    public abstract StateType GetStateType();
 }
