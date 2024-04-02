@@ -6,6 +6,9 @@ public class AIStateMachine : StateMachine
 {
     protected Animator _animator;
 
+    public bool IsWalking { get; set; }
+    public bool IsRunning { get; set; }
+
     protected override void Awake()
     {
         base.Awake();
@@ -40,6 +43,12 @@ public class AIStateMachine : StateMachine
     protected override void Update()
     {
         base.Update();
+
+        if (_animator != null)
+        {
+            _animator.SetBool("IsWalking", IsWalking);
+            _animator.SetBool("IsRunning", IsRunning);
+        }
 
     }
 

@@ -20,6 +20,8 @@ public class AIIdleState : AIState
             return;
 
         Debug.Log("Enter - Idle");
+        aiStateMachine.IsRunning = false;
+        aiStateMachine.IsWalking = false;
         _currentIdleTime = Random.Range(_idleTime.x, _idleTime.y);
     }
 
@@ -28,8 +30,14 @@ public class AIIdleState : AIState
         if (aiStateMachine == null)
             return StateType.None;
 
-        print("Update - Idle");
-        return StateType.Idle;
+
+        if (_currentIdleTime > 0f)
+        {
+            _currentIdleTime -= Time.deltaTime;
+            return StateType.Idle;
+        }
+            
+        return StateType.Patrol;
 
     }
 
