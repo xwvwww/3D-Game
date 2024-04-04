@@ -40,20 +40,22 @@ public class AIZombie : MonoBehaviour
 
     private void Update()
     {
-        if (_currentIdleTime > 0f)
-        {
-            _currentIdleTime = Time.deltaTime;
-            return;
-        }
-
+        
         if (_targetPlayer == null)
         {
+            if (_currentIdleTime > 0f)
+            {
+                _currentIdleTime -= Time.deltaTime;
+                return;
+            }
+
             _agent.SetDestination(_currentPoint.position);
             _animator.SetBool("IsWalking", true);
+            _agent.speed = 0.8f;
         }
         else
         {
-            _agent.SetDestination(transform.position);
+            _agent.SetDestination(_targetPlayer.position);
             _animator.SetBool("IsRunning", true);
         }
 
@@ -66,6 +68,7 @@ public class AIZombie : MonoBehaviour
         _targetTrigger.position = _currentPoint.position;
         _currentIdleTime = Random.Range(_idleTime.x, _idleTime.y);
         _animator.SetBool("IsWalking", false);
+        _agent.speed = 0.001f;
     }
 
 
