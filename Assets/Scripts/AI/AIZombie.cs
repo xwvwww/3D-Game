@@ -7,11 +7,20 @@ public class AIZombie : MonoBehaviour
 {
     [SerializeField] private AIWaypointNetwork _waypoints;
     [SerializeField] private Transform _targetTrigger;
+    [SerializeField] private Vector2 _idleTime;
 
     private Animator _animator;
     private NavMeshAgent _agent;
 
+    private Transform _targetPlayer;
     private Transform _currentPoint;
+    private float _currentIdleTime;
+
+    public Transform TargetPlayer
+    {
+        get { return _targetPlayer; }
+        set { _targetPlayer = value; }
+    }
 
     private void Awake()
     {
@@ -22,7 +31,8 @@ public class AIZombie : MonoBehaviour
     private void Start()
     {
         _currentPoint = _waypoints.GetPoint();
-        _targetTrigger.localPosition = _currentPoint.localPosition;
+        _targetTrigger.position = _currentPoint.position;
+        _currentIdleTime = Random.Range(_idleTime.x, _idleTime.y);
 
     }
 
@@ -30,13 +40,32 @@ public class AIZombie : MonoBehaviour
 
     private void Update()
     {
-        if (Vector3.Distance(_currentPoint.position, transform.position) < 5f)
+        if (_currentIdleTime > 0f)
         {
-            _currentPoint = _waypoints.GetPoint();
+            _currentIdleTime = Time.deltaTime;
+            return;
         }
-        _agent.SetDestination(_currentPoint.position);
+
+        if (_targetPlayer == null)
+        {
+            _agent.SetDestination(_currentPoint.position);
+            _animator.SetBool("IsWalking", true);
+        }
+        else
+        {
+            _agent.SetDestination(transform.position);
+            _animator.SetBool("IsRunning", true);
+        }
 
         
+    }
+
+    public void ChangePoint()
+    {
+        _currentPoint = _waypoints.GetPoint();
+        _targetTrigger.position = _currentPoint.position;
+        _currentIdleTime = Random.Range(_idleTime.x, _idleTime.y);
+        _animator.SetBool("IsWalking", false);
     }
 
 
