@@ -5,6 +5,8 @@ using UnityEngine.AI;
 
 public class AIZombie : MonoBehaviour
 {
+    [SerializeField] private float _walkSpeed;
+    [SerializeField] private float _runSpeed;
     [SerializeField] private AIWaypointNetwork _waypoints;
     [SerializeField] private Transform _targetTrigger;
     [SerializeField] private Vector2 _idleTime;
@@ -30,9 +32,7 @@ public class AIZombie : MonoBehaviour
 
     private void Start()
     {
-        _currentPoint = _waypoints.GetPoint();
-        _targetTrigger.position = _currentPoint.position;
-        _currentIdleTime = Random.Range(_idleTime.x, _idleTime.y);
+        SetTargetPoint();
 
     }
 
@@ -50,13 +50,10 @@ public class AIZombie : MonoBehaviour
             }
 
             _agent.SetDestination(_currentPoint.position);
-            _animator.SetBool("IsWalking", true);
-            _agent.speed = 0.8f;
         }
         else
         {
             _agent.SetDestination(_targetPlayer.position);
-            _animator.SetBool("IsRunning", true);
         }
 
         
@@ -64,11 +61,15 @@ public class AIZombie : MonoBehaviour
 
     public void ChangePoint()
     {
+        SetTargetPoint();
+        _agent.speed = 0.0001f;
+    }
+
+    private void SetTargetPoint()
+    {
         _currentPoint = _waypoints.GetPoint();
         _targetTrigger.position = _currentPoint.position;
         _currentIdleTime = Random.Range(_idleTime.x, _idleTime.y);
-        _animator.SetBool("IsWalking", false);
-        _agent.speed = 0.001f;
     }
 
 
