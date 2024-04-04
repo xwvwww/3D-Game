@@ -6399,6 +6399,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0424ffb7ee362fa44b1a1abcdc897053, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _walkSpeed: 0.8
+  _runSpeed: 3
   _waypoints: {fileID: 1825203005}
   _targetTrigger: {fileID: 245648155}
   _idleTime: {x: 5, y: 15}

@@ -46,23 +46,48 @@ public class AIZombie : MonoBehaviour
             if (_currentIdleTime > 0f)
             {
                 _currentIdleTime -= Time.deltaTime;
+                _agent.speed = 0.001f;
                 return;
             }
 
             _agent.SetDestination(_currentPoint.position);
+            _agent.speed = _walkSpeed;
         }
         else
         {
             _agent.SetDestination(_targetPlayer.position);
+            _agent.speed = _runSpeed;
         }
 
-        
+        Animate();
     }
 
     public void ChangePoint()
     {
         SetTargetPoint();
         _agent.speed = 0.0001f;
+    }
+
+    private void Animate()
+    {
+        if (_animator == null)
+            return;
+
+        if (TargetPlayer != null && _agent.velocity.magnitude > 1f)
+        {
+            _animator.SetBool("IsRunning", true);
+        }
+        else if (TargetPlayer == null && _agent.velocity.magnitude > 0.3f)
+        {
+            _animator.SetBool("IsWalking", true);
+        }
+        else
+        {
+            _animator.SetBool("IsRunning", false);
+            _animator.SetBool("IsWalking", false);
+        }
+
+        
     }
 
     private void SetTargetPoint()
