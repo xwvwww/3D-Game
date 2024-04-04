@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class AIStateMachine : StateMachine
 {
     protected Animator _animator;
+
+    public Animator Animator => _animator;
 
     public bool IsWalking { get; set; }
     public bool IsRunning { get; set; }

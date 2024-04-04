@@ -15,8 +15,8 @@ TagManager:
   - Bullet
   - AISensor
   - Player
-  - 
-  - 
+  - AITargetTrigger
+  - AI
   - 
   - 
   - 
