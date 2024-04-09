@@ -31,17 +31,4 @@ public class Health : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        Debug.Log("PlayerTrigger");
-
-        if (other.CompareTag("Player"))
-        {
-            Health playerHealth = GetComponent<Health>();
-            if (playerHealth != null)
-            {
-                playerHealth.TakeDamage(10);
-            }
-        }
-    }
 }
