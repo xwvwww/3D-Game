@@ -9,3 +9,4 @@ Spacebar: Jump
 Mouse1: Shoot
 Mouse2: Aim
 
+https://xwvresonance.itch.io/untitled-3d-game
